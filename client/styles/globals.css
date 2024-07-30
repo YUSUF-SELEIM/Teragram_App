@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer{
+    .Teragram{
+        background-image: url('../public/TeraGram.jpg');
+        background-size: cover;
+    }
+}
