@@ -1,3 +1,5 @@
+import { ApolloWrapper } from "./ApolloWrapper";
+
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
@@ -35,7 +37,7 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div>
-            <main>{children}</main>
+            <ApolloWrapper>{children}</ApolloWrapper>
           </div>
         </Providers>
       </body>
