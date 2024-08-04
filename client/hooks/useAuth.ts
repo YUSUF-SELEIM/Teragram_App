@@ -1,8 +1,18 @@
 import { gql, useMutation } from "@apollo/client";
 
 const REGISTER_MUTATION = gql`
-  mutation Register($email: String!, $password: String!) {
-    register(email: $email, password: $password) {
+  mutation Register(
+    $name: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+  ) {
+    register(
+      name: $name
+      email: $email
+      password: $password
+      confirmPassword: $confirmPassword
+    ) {
       id
       email
     }
