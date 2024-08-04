@@ -6,7 +6,7 @@ import SignUpForm from "@/components/SignUpForm";
 import LoginForm from "@/components/LoginForm";
 
 export default function Home() {
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   return (
     <section className="flex h-screen bg-white dark:bg-black ">
