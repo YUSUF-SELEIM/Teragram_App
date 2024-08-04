@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AiFillMail, AiFillLock } from "react-icons/ai";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Spinner } from "@nextui-org/react";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 
@@ -27,9 +27,11 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
   });
   const { login } = useAuth();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
+      setIsLoading(true);
       const response = await login({
         variables: {
           email: data.email,
@@ -57,12 +59,12 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
       );
 
       if (cookieResponse.ok) {
-        // Handle successful cookie setting, such as redirecting the user
         console.log("Cookie set successfully");
       } else {
         console.error("Failed to set cookie");
       }
       router.push(`/chats/${userId}`);
+      setIsLoading(false);
     } catch (error: any) {
       // Handling server-side errors
       const serverError = error.message;
@@ -113,7 +115,7 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
         type="submit"
         variant="shadow"
       >
-        Log In
+        {isLoading ? <Spinner color="white" size="sm" /> : "Log In"}
       </Button>
       <p className="text-sm text-center text-gray-600 dark:text-gray-300">
         Don&apos;t have an account?{" "}
