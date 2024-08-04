@@ -23,10 +23,15 @@ export const getAllUsers = async (_parent: any, args: any, contextValue: context
 };
 
 // Register a new user
-// Register a new user (returns user only)
 export const register = async (_parent: any, args: any) => {
     console.log('Register mutation called with args:', args);
-    const { email, password } = args;
+    const { name, email, password, confirmPassword } = args;
+
+    // Check if password and confirm password match
+    if (password !== confirmPassword) {
+        throw new Error('Password and confirm password do not match');
+    }
+
     console.log('Email:', email);
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log('Password hashed:', hashedPassword);
@@ -34,6 +39,7 @@ export const register = async (_parent: any, args: any) => {
     // Create the user in the database
     const user = await prisma.user.create({
         data: {
+            name,
             email,
             password: hashedPassword,
         },
@@ -47,7 +53,8 @@ export const register = async (_parent: any, args: any) => {
     }
 
     return user;
-}
+};
+
 // Login a user
 export const login = async (_parent: any, args: any) => {
     console.log('Login mutation called with args:', args);
