@@ -5,6 +5,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './graphql/index';
 import { context } from "./graphql/context";
+import cookieSetter from "./util/cookie-setter";
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/graphql", expressMiddleware(server, {
   context
 }));
+
+app.post('/api/set-cookie', cookieSetter);
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
