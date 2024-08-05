@@ -76,9 +76,6 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="text-2xl font-bold text-center text-black transition-transform duration-200 transform dark:text-white hover:scale-105">
-        Log In
-      </h2>
       <div>
         <Input
           className="dark:bg-black dark:border-white dark:text-white"
