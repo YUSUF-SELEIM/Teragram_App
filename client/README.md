@@ -1,1 +1,0 @@
-https://unsplash.com/photos/a-close-up-of-a-purple-fabric-t9jt6kENW_U?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash
