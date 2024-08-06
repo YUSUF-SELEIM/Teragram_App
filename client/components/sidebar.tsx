@@ -31,8 +31,8 @@ function Sidebar({
       {isUserInfoVisible && <UserInfo />}
       <div className="flex items-center justify-end w-full">
         <PopOver>
-          <button className="p-4 text-white rounded-full shadow-2xl bg-violet-700">
-            <FaPen className="transition-transform transform text-md duration-250 hover:-rotate-12" />
+          <button className="p-5 text-white rounded-full shadow-2xl bg-violet-700">
+            <FaPen className="text-lg transition-transform transform text-md duration-250 hover:-rotate-12" />
           </button>
         </PopOver>
       </div>
