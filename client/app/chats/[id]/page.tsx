@@ -2,12 +2,11 @@
 import { useState, useEffect } from "react";
 import nookies from "nookies";
 import { useRouter } from "next/navigation";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-interface User {
-  id: string;
-  name: string;
-}
+import Dashboard from "@/components/dashboard";
+import Sidebar from "@/components/sidebar";
+import Chat from "@/components/chat ";
 
 interface TokenPayload {
   id: string;
@@ -15,21 +14,20 @@ interface TokenPayload {
 
 const ChatPage = ({ params }: { params: { id: string } }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isDashboardVisible, setIsDashboardVisible] = useState<boolean>(false);
+  const [isUserInfoVisible, setIsUserInfoVisible] = useState<boolean>(false);
+
   const router = useRouter();
 
   useEffect(() => {
     // Check for the token in the cookies
     const cookies = nookies.get();
-    console.log("Cookies:", cookies); // Log all cookies to check what’s available
-
     const token = cookies.token;
-    console.log("Token:", token);
 
     if (token) {
       try {
         // Decode the token to get the user ID
         const decodedToken = jwtDecode<TokenPayload>(token);
-        console.log("Decoded Token:", decodedToken);
 
         // Check if the token ID matches the params ID
         if (decodedToken.id === params.id) {
@@ -39,7 +37,6 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
           router.push("/"); // Redirect if IDs do not match
         }
       } catch (error) {
-        console.error("Invalid token:", error);
         setIsLoggedIn(false);
         router.push("/"); // Redirect if token is invalid
       }
@@ -49,22 +46,26 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
     }
   }, [params.id, router]);
 
+  const toggleDashboard = () => {
+    setIsDashboardVisible((prev) => !prev);
+  };
+  const toggleUserInfo = () => {
+    setIsUserInfoVisible((prev) => !prev);
+  };
+
   return (
     <div className="flex h-screen">
-      <div className="w-1/4 p-4 bg-gray-200">
-        <h2 className="text-xl font-bold">Users</h2>
-        {params.id}
-        <button
-          className="px-4 py-2 mt-4 text-white bg-red-600 rounded"
-          onClick={() => {
-            // Handle logout logic
-            nookies.destroy(null, "token"); // Destroy token cookie
-            router.push("/"); // Redirect after logout
-          }}
-        >
-          Logout
-        </button>
+      <div
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${isDashboardVisible ? "w-24" : "w-0"}`}
+      >
+        <Dashboard toggleUserInfo={toggleUserInfo} />
       </div>
+      <Sidebar
+        id={params.id}
+        isUserInfoVisible={isUserInfoVisible}
+        toggleDashboard={toggleDashboard}
+      />
+      <Chat />
     </div>
   );
 };
