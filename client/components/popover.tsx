@@ -1,5 +1,6 @@
 import React from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import { BiSolidUserPlus, BiSolidGroup } from "react-icons/bi";
 
 export default function PopOver({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -13,10 +14,15 @@ export default function PopOver({ children }: { children: React.ReactNode }) {
       >
         <PopoverTrigger>{children}</PopoverTrigger>
         <PopoverContent>
-          <div className="p-4">
-            <h2 className="text-xl font-bold">User Info</h2>
-            <p>Name: John Doe</p>
-            <p>Email: john.doe@example.com</p>
+          <div className="p-1 flex flex-col space-y-2">
+            <button className="flex items-center justify-start w-full p-2 rounded-lg transition-all duration-200 transform hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105">
+              <BiSolidUserPlus className="text-xl" />
+              <span className="ml-2 flex-1 text-left">New Chat</span>
+            </button>
+            <button className="flex items-center justify-start w-full p-2 rounded-lg transition-all duration-200 transform hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105">
+              <BiSolidGroup className="text-xl" />
+              <span className="ml-2 flex-1 text-left">New Group</span>
+            </button>
           </div>
         </PopoverContent>
       </Popover>
