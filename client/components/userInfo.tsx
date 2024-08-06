@@ -3,7 +3,7 @@ import { FaPen } from "react-icons/fa";
 
 const UserInfo = () => {
   return (
-    <div className="absolute top-0 right-0 z-10 w-full h-full bg-neutral-100 dark:bg-neutral-900 dark:text-white">
+    <div className="absolute top-0 right-0 z-50 w-full h-full bg-neutral-100 dark:bg-neutral-900 dark:text-white">
       <div className="w-full h-full ">
         <div className="flex flex-col items-center justify-center w-full h-full space-y-4">
           <div className="relative">
