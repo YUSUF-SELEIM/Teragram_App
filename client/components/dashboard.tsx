@@ -9,7 +9,7 @@ const Dashboard = ({ toggleUserInfo }: { toggleUserInfo: () => void }) => {
   const router = useRouter();
 
   return (
-    <div className="relative flex flex-col items-center justify-between h-full p-4 bg-neutral-200 dark:bg-neutral-950 py-7 dark:text-white">
+    <div className="relative flex flex-col items-center justify-between h-full p-4 bg-neutral-200 dark:bg-neutral-900 py-7 dark:text-white">
       <nav>
         <ul className="flex flex-col items-center h-full space-y-8">
           <li>
