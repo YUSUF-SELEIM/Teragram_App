@@ -1,7 +1,9 @@
 type User {
   id: String!
+  name: String!
   email: String!
   password: String!
+  imageUrl: String
 }
 
 type AuthPayload {
