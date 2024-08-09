@@ -1,0 +1,37 @@
+enum ChatType {
+  SINGLE
+  GROUP
+}
+
+type Chat {
+  id: String!
+  type: ChatType!
+  messages: [Message!]!
+  users: [User!]!  # List of users in this chat
+}
+
+type Message {
+  id: String!
+  content: String!
+  sender: User!
+  chat: Chat!
+  createdAt: String!
+}
+
+# Type for user-chats mapping
+type UserChat {
+  user: User!
+  chat: Chat!
+}
+
+type Query {
+  userChats(id: ID!): [Chat!]!  # Fetch all chats
+  chat(id: ID!): Chat  # Fetch a specific chat by ID
+  messages(chatId: ID!): [Message!]!  # Fetch messages for a specific chat
+}
+
+type Mutation {
+  createChat(type: ChatType!, userIds: [ID!]!): Chat!  # Create a new chat
+#   addMessage(chatId: ID!, content: String!): Message!  # Add a message to a chat
+  addUserToGroupChat(chatId: ID!, userId: ID!): Chat!  # Add a user to a chat (for group chats)
+}
