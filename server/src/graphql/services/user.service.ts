@@ -11,13 +11,23 @@ interface contextValue {
 // Fetch all users (using context for authentication)
 export const getAllUsers = async (_parent: any, args: any, contextValue: contextValue) => {
     console.log('Context:', contextValue);
-    console.log('Context yuser:', contextValue.user);
+    console.log('Context user:', contextValue.user);
 
     if (!contextValue.user) {
         throw new Error('Not authenticated');
     }
 
-    const users = await prisma.user.findMany();
+    const currentUserId = contextValue.user.id;
+
+    // Fetch all users except the current user
+    const users = await prisma.user.findMany({
+        where: {
+            id: {
+                not: currentUserId // Exclude the current user
+            }
+        }
+    });
+
     console.log('Users fetched:', users);
     return users;
 };
