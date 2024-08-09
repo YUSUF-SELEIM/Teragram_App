@@ -4,6 +4,7 @@ type User {
   email: String!
   password: String!
   imageUrl: String
+  chats: [Chat!]!  # List of chats that the user is part of
 }
 
 type AuthPayload {
