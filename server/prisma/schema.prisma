@@ -8,9 +8,44 @@ generator client {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String @unique
-  password String
-  imageUrl String?
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String     @unique
+  password  String
+  imageUrl  String?
+  userChats UserChat[]
+  messages  Message[]
+}
+
+model Chat {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  type      ChatType
+  messages  Message[]
+  userChats UserChat[]
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  String   @db.ObjectId
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+}
+
+model UserChat {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  chatId String @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id])
+  chat Chat @relation(fields: [chatId], references: [id])
+
+  @@unique([userId, chatId]) // Ensure a user cannot have multiple chats with the same chat
+}
+
+enum ChatType {
+  SINGLE
+  GROUP
 }
