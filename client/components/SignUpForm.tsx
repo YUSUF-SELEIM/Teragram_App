@@ -49,6 +49,7 @@ function SignUpForm({
       setIsLoading(false);
     } catch (error) {
       console.error("Error registering:", error);
+      setIsLoading(false);
     }
   };
 

@@ -72,6 +72,7 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
 
       // Set server-side error message
       setError("password", { message: serverError });
+      setIsLoading(false);
     }
   };
 
