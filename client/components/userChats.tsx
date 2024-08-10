@@ -42,7 +42,7 @@ function UserChats({
   if (loading)
     return (
       <div className="flex flex-col items-center justify-center h-full">
-        <Spinner color="white" />
+        <Spinner color="secondary" />
       </div>
     );
   if (error) return <p>Error: {error.message}</p>;

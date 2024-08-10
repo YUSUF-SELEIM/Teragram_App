@@ -2,6 +2,7 @@ import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { BiArrowBack } from "react-icons/bi";
 import Image from "next/image";
+import { Spinner } from "@nextui-org/react";
 
 import Search from "./search";
 
@@ -40,7 +41,12 @@ function Users({
   // Mutation to create a chat
   const [createSingleChat] = useMutation(CREATE_SINGLE_CHAT);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="absolute top-0 right-0 z-50 flex flex-col items-center justify-center w-full h-full bg-neutral-100 dark:bg-neutral-900 dark:text-white">
+        <Spinner color="secondary" />
+      </div>
+    );
   if (error) return <p>Error: {error.cause?.message}</p>;
 
   // Handle user selection and chat creation
