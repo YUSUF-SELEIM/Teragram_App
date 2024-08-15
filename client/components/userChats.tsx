@@ -24,9 +24,11 @@ const GET_USER_CHATS = gql`
 function UserChats({
   id,
   shouldRefetch,
+  handleChatClick,
 }: {
   id: string;
   shouldRefetch: boolean;
+  handleChatClick: (chatId: string) => void;
 }) {
   const { data, loading, error, refetch } = useQuery(GET_USER_CHATS, {
     variables: { userChatsId: id },
@@ -34,6 +36,7 @@ function UserChats({
   });
 
   useEffect(() => {
+    console.log("ID is ", id)
     if (shouldRefetch) {
       refetch();
     }
@@ -56,7 +59,7 @@ function UserChats({
           <button
             key={chat.id}
             className="flex items-center w-full p-2 space-x-4 rounded-md cursor-pointer dark:bg-neutral-900 hover:bg-white dark:hover:bg-neutral-800"
-            // onClick={route to/c/chatid}
+            onClick={() => handleChatClick(chat.id)}
           >
             <Image
               alt={chat.users[0]?.name || "User Avatar"}
