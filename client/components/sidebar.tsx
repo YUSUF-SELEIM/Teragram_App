@@ -12,10 +12,12 @@ function Sidebar({
   id,
   toggleDashboard,
   isUserInfoVisible,
+  handleChatClick,
 }: {
   id: string;
   toggleDashboard: () => void;
   isUserInfoVisible: boolean;
+  handleChatClick: (chatId: string) => void;
 }) {
   const [isUsersVisible, setIsUsersVisible] = useState<boolean>(false);
   const [shouldRefetch, setShouldRefetch] = useState(false);
@@ -28,7 +30,7 @@ function Sidebar({
   };
 
   return (
-    <div className="relative flex flex-col h-full w-full p-4 md:w-[45%] bg-neutral-100 dark:bg-neutral-900 dark:text-white">
+    <div className="relative flex flex-col h-full w-full p-4 md:w-[30%] bg-neutral-100 dark:bg-neutral-900 dark:text-white ">
       <div className="flex items-center w-full space-x-2">
         <Image
           alt="logo"
@@ -40,7 +42,11 @@ function Sidebar({
         />
         <Search />
       </div>
-      <UserChats id={id} shouldRefetch={shouldRefetch} />
+      <UserChats
+        handleChatClick={handleChatClick}
+        id={id}
+        shouldRefetch={shouldRefetch}
+      />
       {isUserInfoVisible && <UserInfo />}
       {isUsersVisible && (
         <Users
@@ -49,7 +55,7 @@ function Sidebar({
           onChatCreated={triggerRefetch}
         />
       )}
-      <div className="flex items-end justify-end w-full">
+      <div className="flex items-end justify-end w-full ml-3">
         <PopOver setIsUsersVisible={setIsUsersVisible}>
           <button className="p-5 text-white rounded-full shadow-2xl bg-violet-700">
             <FaPen className="text-lg transition-transform transform text-md duration-250 hover:-rotate-12" />
