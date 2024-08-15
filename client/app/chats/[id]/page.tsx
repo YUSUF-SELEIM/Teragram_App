@@ -16,6 +16,8 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isDashboardVisible, setIsDashboardVisible] = useState<boolean>(false);
   const [isUserInfoVisible, setIsUserInfoVisible] = useState<boolean>(false);
+  const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
+  const [isChatVisible, setChatVisible] = useState(false);
 
   const router = useRouter();
 
@@ -52,20 +54,33 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
   const toggleUserInfo = () => {
     setIsUserInfoVisible((prev) => !prev);
   };
+  const handleChatClick = (chatId: string) => {
+    setSelectedChatId(chatId);
+    setChatVisible(true);
+  };
+  const handleBackClick = () => {
+    setChatVisible(false);
+  };
 
   return (
     <div className="flex h-screen">
       <div
-        className={`transition-all duration-500 ease-in-out overflow-hidden ${isDashboardVisible ? "w-24" : "w-0"}`}
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${isDashboardVisible ? "w-16" : "w-0"}`}
       >
         <Dashboard toggleUserInfo={toggleUserInfo} />
       </div>
       <Sidebar
+        handleChatClick={handleChatClick}
         id={params.id}
         isUserInfoVisible={isUserInfoVisible}
         toggleDashboard={toggleDashboard}
       />
-      <Chat />
+      <Chat
+        chatId={selectedChatId}
+        currentUserId={params.id}
+        handleBackClick={handleBackClick}
+        isChatVisible={isChatVisible}
+      />
     </div>
   );
 };
