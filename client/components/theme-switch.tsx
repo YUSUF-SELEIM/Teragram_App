@@ -70,9 +70,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
         })}
       >
         {!isSelected || isSSR ? (
-          <BiSun className="text-2xl transform hover:scale-125 hover:text-violet-400" />
+          <BiSun className="text-2xl transform hover:scale-125" />
         ) : (
-          <BiMoon className="text-2xl transform hover:scale-125 hover:text-violet-400" />
+          <BiMoon className="text-2xl transform hover:scale-125" />
         )}
       </div>
     </Component>
