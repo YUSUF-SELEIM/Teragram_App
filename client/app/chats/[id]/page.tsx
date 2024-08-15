@@ -3,18 +3,17 @@ import { useState, useEffect } from "react";
 import nookies from "nookies";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import Image from "next/image";
 
 import Dashboard from "@/components/dashboard";
 import Sidebar from "@/components/sidebar";
 import Chat from "@/components/chat ";
-
 interface TokenPayload {
   id: string;
 }
 
 const ChatPage = ({ params }: { params: { id: string } }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isDashboardVisible, setIsDashboardVisible] = useState<boolean>(false);
   const [isUserInfoVisible, setIsUserInfoVisible] = useState<boolean>(false);
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
   const [isChatVisible, setChatVisible] = useState(false);
@@ -48,9 +47,6 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
     }
   }, [params.id, router]);
 
-  const toggleDashboard = () => {
-    setIsDashboardVisible((prev) => !prev);
-  };
   const toggleUserInfo = () => {
     setIsUserInfoVisible((prev) => !prev);
   };
@@ -64,16 +60,11 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="flex h-screen">
-      <div
-        className={`transition-all duration-500 ease-in-out overflow-hidden ${isDashboardVisible ? "w-16" : "w-0"}`}
-      >
-        <Dashboard toggleUserInfo={toggleUserInfo} />
-      </div>
+      <Dashboard toggleUserInfo={toggleUserInfo} />
       <Sidebar
         handleChatClick={handleChatClick}
         id={params.id}
         isUserInfoVisible={isUserInfoVisible}
-        toggleDashboard={toggleDashboard}
       />
       <Chat
         chatId={selectedChatId}
@@ -81,6 +72,18 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
         handleBackClick={handleBackClick}
         isChatVisible={isChatVisible}
       />
+      {!selectedChatId && (
+        <div className="items-center justify-center w-[65%] h-full bg-neutral-50 dark:bg-black hidden md:flex">
+          {selectedChatId}
+          <Image
+            alt={"logo"}
+            className="cursor-pointer hover:blur-lg hover:animate-pulse"
+            height={300}
+            src="/logo.png"
+            width={300}
+          />
+        </div>
+      )}
     </div>
   );
 };
