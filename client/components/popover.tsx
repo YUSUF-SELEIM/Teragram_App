@@ -25,17 +25,17 @@ export default function PopOver({
       >
         <PopoverTrigger>{children}</PopoverTrigger>
         <PopoverContent>
-          <div className="p-1 flex flex-col space-y-2">
+          <div className="flex flex-col p-1 space-y-2">
             <button
-              className="flex items-center justify-start w-full p-2 rounded-lg transition-all duration-200 transform hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105"
+              className="flex items-center justify-start w-full p-2 transition-all duration-200 transform rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105"
               onClick={toggleUsers}
             >
               <BiSolidUserPlus className="text-xl" />
-              <span className="ml-2 flex-1 text-left">New Chat</span>
+              <span className="flex-1 ml-2 text-left">New Chat</span>
             </button>
-            <button className="flex items-center justify-start w-full p-2 rounded-lg transition-all duration-200 transform hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105">
+            <button className="flex items-center justify-start w-full p-2 transition-all duration-200 transform rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105">
               <BiSolidGroup className="text-xl" />
-              <span className="ml-2 flex-1 text-left">New Group</span>
+              <span className="flex-1 ml-2 text-left">New Group</span>
             </button>
           </div>
         </PopoverContent>
