@@ -10,7 +10,7 @@ function ChatHeader({
   return (
     <>
       {chattingWithName && (
-        <div className="fixed flex items-center space-x-3 shadow-inner w-full p-4  text-white bg-neutral-100 dark:bg-[#27272A]">
+        <div className="fixed z-50 flex items-center space-x-3 shadow-inner w-full p-4  text-white bg-neutral-100 dark:bg-[#27272A]">
           <BiArrowBack
             className="text-2xl text-black md:hidden dark:text-white"
             onClick={handleBackClick}
