@@ -9,12 +9,12 @@ const Dashboard = ({ toggleUserInfo }: { toggleUserInfo: () => void }) => {
   const router = useRouter();
 
   return (
-    <div className="relative flex flex-col items-center justify-between h-full p-4 bg-neutral-200 dark:bg-neutral-950 py-7 dark:text-white">
+    <div className="relative md:w-[5%] w-[13%] flex flex-col items-center justify-between h-full p-4 bg-neutral-200 dark:bg-neutral-950 py-7 dark:text-white">
       <nav>
         <ul className="flex flex-col items-center h-full space-y-8">
           <li>
             <button onClick={toggleUserInfo}>
-              <BiUserCircle className="text-2xl transform hover:scale-125 hover:text-violet-400" />
+              <BiUserCircle className="text-2xl transform hover:scale-125" />
             </button>
           </li>
 
@@ -29,7 +29,7 @@ const Dashboard = ({ toggleUserInfo }: { toggleUserInfo: () => void }) => {
                 router.push("/");
               }}
             >
-              <BiLogOutCircle className="text-2xl transform hover:scale-125 hover:text-violet-400" />
+              <BiLogOutCircle className="text-2xl transform hover:scale-125" />
             </button>
           </li>
         </ul>
