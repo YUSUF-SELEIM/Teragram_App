@@ -26,12 +26,12 @@ type UserChat {
 
 type Query {
   userChats(id: ID!): [Chat!]!  # Fetch all chats
-  chat(id: ID!): Chat  # Fetch a specific chat by ID
-  messages(chatId: ID!): [Message!]!  # Fetch messages for a specific chat
+  getChatById(id: ID!): Chat!  # Fetch a specific chat by ID
+  getMessagesByChatId(chatId: ID!): [Message!]!  # Fetch messages for a specific chat
 }
 
 type Mutation {
   createChat(type: ChatType!, userIds: [ID!]!): Chat!  # Create a new chat
-#   addMessage(chatId: ID!, content: String!): Message!  # Add a message to a chat
+  addMessage(chatId: ID!, content: String!, imageUrl: String): Message!
   addUserToGroupChat(chatId: ID!, userId: ID!): Chat!  # Add a user to a chat (for group chats)
 }
