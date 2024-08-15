@@ -173,3 +173,99 @@ export async function getUserChats(userId: string) {
         messages: chat.messages
     }));
 }
+export async function getChatById(id: string) {
+    if (!id) {
+        throw new Error("Chat ID must be provided");
+    }
+
+    const chat = await prisma.chat.findUnique({
+        where: { id: id },
+        include: {
+            userChats: {
+                include: {
+                    user: true  // Ensure users are fetched
+                }
+            }
+        }
+    });
+
+    if (!chat) {
+        throw new Error("Chat not found");
+    }
+
+    // Transforming the userChats relation to match the users field in your GraphQL schema
+    const users = chat.userChats.map(userChat => userChat.user);
+
+    return {
+        ...chat,
+        users  // Adding the transformed users field
+    };
+}
+
+
+export async function getMessagesByChatId(chatId: string) {
+  console.log("ID: " + chatId);
+  
+  if (!chatId) {
+    throw new Error("Chat ID must be provided");
+  }
+
+  // Fetch messages for the specific chat
+  const messages = await prisma.message.findMany({
+    where: { chatId: chatId },
+    include: {
+      sender: true, // Include sender details in messages
+    },
+  });
+
+  // Ensure an empty array is returned if no messages are found
+  return messages || [];
+}
+
+
+interface AddMessageArgs {
+    chatId: string;
+    content: string;
+    imageUrl?: string;
+    userId: string;
+  }
+  
+  export const addMessage = async ({ chatId, content, imageUrl, userId }: AddMessageArgs) => {
+    // Create a new message in the chat
+    const newMessage = await prisma.message.create({
+        data: {
+          content,
+          imageUrl: imageUrl || null,
+          chat: {
+            connect: { id: chatId },
+          },
+          sender: {
+            connect: { id: userId },
+          },
+        },
+        include: {
+            sender: true,
+          chat: {
+            include: {
+              userChats: {
+                include: {
+                  user: true, // Include users in the chat
+                },
+              },
+            },
+          },
+        },
+      });
+
+      // Transform userChats to users
+      const chatWithUsers = {
+        ...newMessage,
+        chat: {
+          ...newMessage.chat,
+          users: newMessage.chat.userChats.map(uc => uc.user),
+        },
+      };
+
+      return chatWithUsers;
+  
+  };
