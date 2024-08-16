@@ -1,4 +1,4 @@
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Spinner } from "@nextui-org/react";
 import React from "react";
 import { BiImageAdd, BiSend } from "react-icons/bi";
 
@@ -8,12 +8,14 @@ function ChatInput({
   image,
   message,
   setMessage,
+  isUploading,
 }: {
   handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSendMessage: () => void;
-  image: File | null;
+  image: String | null;
   message: string;
   setMessage: (message: string) => void;
+  isUploading: boolean;
 }) {
   return (
     <div className="z-50 flex items-center w-full p-2 px-6 space-x-2 dark:bg-black">
@@ -25,14 +27,18 @@ function ChatInput({
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-
         <div className="flex items-center p-2">
           <label className="cursor-pointer" htmlFor="img">
             {}
-            <BiImageAdd
-              className="text-xl text-gray-500 hover:text-violet-700"
-              size={24}
-            />
+            {isUploading ? (
+              <Spinner className="p-1" color="secondary" size="sm" />
+            ) : (
+              <BiImageAdd
+                className={`text-xl hover:text-violet-700 ${image ? "text-violet-700" : "text-gray-500"}`}
+                size={24}
+              />
+            )}
+            <div />
             <input
               accept="image/*"
               className="hidden"
@@ -43,13 +49,6 @@ function ChatInput({
           </label>
         </div>
       </div>
-
-      {image && (
-        <div className="mt-2">
-          <strong>Selected Image:</strong> {image.name}
-        </div>
-      )}
-
       <Button
         isIconOnly
         className="rounded-full shadow-xl bg-violet-900"
