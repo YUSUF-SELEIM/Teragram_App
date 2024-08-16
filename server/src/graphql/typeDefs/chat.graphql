@@ -13,6 +13,7 @@ type Chat {
 type Message {
   id: String!
   content: String!
+  imageUrl: String
   sender: User!
   chat: Chat!
   createdAt: String!
