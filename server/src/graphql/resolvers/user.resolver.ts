@@ -1,4 +1,4 @@
-import { register, getAllUsers, login } from "../services/user.service";
+import { register, getAllUsers, login, updateUserInfo, getUserInfo } from "../services/user.service";
 
 interface contextValue {
   user: any;
@@ -12,8 +12,11 @@ interface contextValue {
 // so that the resolver knows that this is the context object
 const userResolvers = {
   Query: {
-    users: async (_parent: any, args: any, contextValue: contextValue) => {
+    getAllUsers: async (_parent: any, args: any, contextValue: contextValue) => {
       return getAllUsers(_parent, args, contextValue);
+    },
+    getUserInfo: async (_parent: any, args: any, contextValue: contextValue) => {
+      return getUserInfo(_parent, args, contextValue);
     }
   },
   Mutation: {
@@ -23,6 +26,9 @@ const userResolvers = {
     login: async (_parent: any, args: any) => {
       return login(_parent, args);
     },
+    updateUserInfo: async (_parent: any, args: any, contextValue: contextValue) => {
+      return updateUserInfo(_parent, args, contextValue);
+    }
   },
 };
 
