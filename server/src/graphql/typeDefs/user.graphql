@@ -12,11 +12,12 @@ type AuthPayload {
 }
 
 type Query {
-  users: [User!]!
-  user(id: ID!): User
+  getAllUsers: [User!]!
+  getUserInfo(id: ID!): User
 }
 
 type Mutation {
   register(name: String!, email: String!, password: String!, confirmPassword: String!): User! 
   login(email: String!, password: String!): AuthPayload
+  updateUserInfo(id: ID!, name: String, imageUrl: String): User!
 }
