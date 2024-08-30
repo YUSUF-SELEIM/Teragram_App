@@ -8,12 +8,12 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
-    default: "NextUI",
-    template: "%s | NextUI",
+    default: "Teragram",
+    template: "%s | Teragram",
   },
-  description: "NextUI is a React component library with over 50 components.",
+  description: "Teragram is a social media platform - Simple Telegram Clone",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.ico",
   },
 };
 
