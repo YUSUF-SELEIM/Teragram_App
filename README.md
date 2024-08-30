@@ -1,5 +1,6 @@
-
-![alt](./client/public/logo.png)
+<p align="center">
+  <img src="./client/public/logo.png" />
+</p>
 
 # Teragram
 
