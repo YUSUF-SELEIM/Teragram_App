@@ -9,11 +9,9 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import nookies from "nookies";
 
-import { IP_ADDRESS } from "@/lib/ip";
-
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: `http://${IP_ADDRESS}:5000/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_Back_End_URL}/graphql`,
     fetchOptions: { cache: "no-store" },
   });
 

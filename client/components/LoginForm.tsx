@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { loginSchema } from "../lib/ZodValidationSchema";
 
 import { useAuth } from "@/hooks/useAuth";
-import { IP_ADDRESS } from "@/lib/ip";
 
 type FormValues = {
   email: string;
@@ -49,7 +48,7 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
 
       // Make a request to Express server to set the HttpOnly cookie
       const cookieResponse = await fetch(
-        `http://${IP_ADDRESS}:5000/api/set-cookie`,
+        `${process.env.NEXT_PUBLIC_Back_End_URL}/api/set-cookie`,
         {
           method: "POST",
           headers: {
