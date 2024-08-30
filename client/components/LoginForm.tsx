@@ -4,7 +4,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AiFillMail, AiFillLock } from "react-icons/ai";
 import { Button, Input, Spinner } from "@nextui-org/react";
-import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 
 import { loginSchema } from "../lib/ZodValidationSchema";
@@ -42,10 +41,6 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
 
       const { token } = response.data.login;
 
-      // Decode the token to get user info
-      const decoded: any = jwtDecode(token);
-      const userId = decoded.id;
-
       // Make a request to Express server to set the HttpOnly cookie
       const cookieResponse = await fetch(
         `${process.env.NEXT_PUBLIC_Back_End_URL}/api/set-cookie`,
@@ -54,19 +49,39 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
+          credentials: "include", // Make sure cookies are sent with the request
           body: JSON.stringify({ token }),
         },
       );
 
       if (cookieResponse.ok) {
         console.log("Cookie set successfully");
+
+        // Make a request to validate the cookie
+        const validationResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_Back_End_URL}/api/validate-token`,
+          {
+            method: "GET",
+            credentials: "include", // Make sure cookies are sent with the request
+          },
+        );
+
+        if (validationResponse.ok) {
+          const userData = await validationResponse.json();
+
+          console.log("User data:", userData);
+
+          // Redirect to user-specific chat page
+          router.push(`/chats/${userData.userId}`);
+        } else {
+          console.error("Failed to validate cookie");
+        }
       } else {
         const errorText = await cookieResponse.text();
 
         console.error("Failed to set cookie " + errorText);
       }
-      router.push(`/chats/${userId}`);
+
       setIsLoading(false);
     } catch (error: any) {
       // Handling server-side errors
