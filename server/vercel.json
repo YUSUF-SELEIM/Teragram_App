@@ -1,15 +1,45 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "./dest/app.js",
-            "use": "@vercel/node"
-        }
+      {
+        "src": "./dest/app.js",
+        "use": "@vercel/node"
+      }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "./dest/app.js"
+      {
+        "src": "/graphql",
+        "dest": "./dest/app.js",
+        "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*", 
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true"
         }
+      },
+      {
+        "src": "/api/set-cookie",
+        "dest": "./dest/app.js",
+        "methods": ["POST"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true"
+        }
+      },
+      {
+        "src": "/(.*)",
+        "dest": "./dest/app.js",
+        "methods": ["GET"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Credentials": "true"
+        }
+      }
     ]
-}
+  }
+  
