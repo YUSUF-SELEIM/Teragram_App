@@ -2,7 +2,8 @@ const cookieSetter = (req, res) => {
     const { token } = req.body;
     res.cookie('token', token, {
         httpOnly: false,
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
+        sameSite: 'none',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         path: '/',
     });
