@@ -33,10 +33,10 @@ export default function PopOver({
               <BiSolidUserPlus className="text-xl" />
               <span className="flex-1 ml-2 text-left">New Chat</span>
             </button>
-            <button className="flex items-center justify-start w-full p-2 transition-all duration-200 transform rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105">
+            {/* <button className="flex items-center justify-start w-full p-2 transition-all duration-200 transform rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:scale-105">
               <BiSolidGroup className="text-xl" />
               <span className="flex-1 ml-2 text-left">New Group</span>
-            </button>
+            </button> */}
           </div>
         </PopoverContent>
       </Popover>
