@@ -51,9 +51,9 @@ function LoginForm({ setIsSignUp }: { setIsSignUp: (value: boolean) => void }) {
         `${process.env.NEXT_PUBLIC_Back_End_URL}/api/set-cookie`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
           credentials: "include",
           body: JSON.stringify({ token }),
         },
