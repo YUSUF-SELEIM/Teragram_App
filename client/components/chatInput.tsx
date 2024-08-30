@@ -18,7 +18,7 @@ function ChatInput({
   isUploading: boolean;
 }) {
   return (
-    <div className="z-50 flex items-center w-full p-2 px-6 space-x-2 dark:bg-black">
+    <div className="z-50 flex items-center w-full p-2 px-6 space-x-2 dark:bg-black bg-violet-700 bg-gradient-to-br">
       <div className="flex w-full bg-[#F4F4F5] dark:bg-neutral-800 rounded-2xl h-full">
         <Input
           placeholder="Message"
