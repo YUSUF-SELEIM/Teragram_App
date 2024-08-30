@@ -1,12 +1,16 @@
 import { BiArrowBack } from "react-icons/bi";
-import Image from "next/image";
+
 function ChatHeader({
+  chattingWithImageUrl,
   chattingWithName,
   handleBackClick,
 }: {
+  chattingWithImageUrl: string;
   chattingWithName: string | null;
   handleBackClick: () => void;
 }) {
+  console.log(chattingWithImageUrl);
+
   return (
     <>
       {chattingWithName && (
@@ -15,16 +19,13 @@ function ChatHeader({
             className="text-2xl text-black md:hidden dark:text-white"
             onClick={handleBackClick}
           />
-
-          <Image
+          <img
             alt={chattingWithName || "user"}
-            className="rounded-full"
-            height={42}
+            className="rounded-full w-10 h-10"
             src={
-              //   chat.users[0]?.imageUrl ||
+              chattingWithImageUrl ||
               `https://avatar.iran.liara.run/username?username=${chattingWithName}`
             }
-            width={42}
           />
           <h1 className="text-xl font-medium text-black dark:text-white">
             {chattingWithName}
