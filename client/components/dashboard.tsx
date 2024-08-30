@@ -9,7 +9,7 @@ const Dashboard = ({ toggleUserInfo }: { toggleUserInfo: () => void }) => {
   const router = useRouter();
 
   return (
-    <div className="relative md:w-[5%] w-[13%] flex flex-col items-center justify-between h-full p-4 bg-neutral-200 dark:bg-neutral-950 py-7 dark:text-white">
+    <div className="relative md:w-[5%] w-[15%] flex flex-col items-center justify-between h-full p-4 bg-neutral-200 dark:bg-neutral-950 py-7 dark:text-white">
       <nav>
         <ul className="flex flex-col items-center h-full space-y-8">
           <li>
@@ -25,7 +25,7 @@ const Dashboard = ({ toggleUserInfo }: { toggleUserInfo: () => void }) => {
             <button
               onClick={() => {
                 // Destroy token cookie
-                nookies.destroy(null, "token", { path: "/" });
+                localStorage.removeItem("token");
                 router.push("/");
               }}
             >
