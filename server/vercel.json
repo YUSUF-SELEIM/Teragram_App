@@ -19,6 +19,9 @@
         },
         {
             "src":"/api/set-cookie","dest":"dest/app.js"   
+        },
+        {
+            "src":"/api/validate-token","dest":"dest/app.js"   
         }
     ]
 }
