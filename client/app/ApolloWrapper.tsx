@@ -17,6 +17,7 @@ function makeClient() {
 
   const authLink = setContext((_, { headers }) => {
     const cookies = nookies.get();
+    console.log("Cookies: ", cookies);
     const token = cookies.token;
 
     console.log("Token from cookies: ", token);
