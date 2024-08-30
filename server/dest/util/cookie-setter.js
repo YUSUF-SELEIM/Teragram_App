@@ -1,5 +1,6 @@
 const cookieSetter = (req, res) => {
     const { token } = req.body;
+    console.log("backend token"+token);
     res.cookie('token', token, {
         httpOnly: false,
         secure: true,
