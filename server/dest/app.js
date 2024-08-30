@@ -27,7 +27,7 @@ app.use("/graphql", expressMiddleware(server, {
     context
 }));
 app.post('/api/set-cookie', cookieSetter);
-app.post('/api/validate-token', validateToken);
+app.get('/api/validate-token', validateToken);
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
     console.log(`GraphQL server running on http://localhost:${port}/graphql`);
