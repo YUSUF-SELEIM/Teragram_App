@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import nookies from "nookies";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
@@ -21,9 +20,7 @@ const ChatPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check for the token in the cookies
-    const cookies = nookies.get();
-    const token = cookies.token;
+    const token = localStorage.getItem("token");
 
     if (token) {
       try {

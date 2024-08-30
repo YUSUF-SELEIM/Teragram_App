@@ -7,7 +7,6 @@ import {
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
 import { setContext } from "@apollo/client/link/context";
-import nookies from "nookies";
 
 function makeClient() {
   const httpLink = new HttpLink({
@@ -16,11 +15,7 @@ function makeClient() {
   });
 
   const authLink = setContext((_, { headers }) => {
-    const cookies = nookies.get();
-    console.log("Cookies: ", cookies);
-    const token = cookies.token;
-
-    console.log("Token from cookies: ", token);
+    const token = localStorage.getItem("token");
 
     // Return the headers to the context so httpLink can read them
     return {

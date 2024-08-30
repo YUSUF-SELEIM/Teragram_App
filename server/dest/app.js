@@ -5,12 +5,9 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './graphql/index.js';
 import { context } from "./graphql/context.js";
-import cookieSetter from "./util/cookie-setter.js";
-import { validate } from "graphql";
-import validateToken from "./util/validate-token.js";
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.set('trust proxy', 1);
 const server = new ApolloServer({
     typeDefs,
@@ -26,8 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/graphql", expressMiddleware(server, {
     context
 }));
-app.post('/api/set-cookie', cookieSetter);
-app.get('/api/validate-token', validateToken);
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
     console.log(`GraphQL server running on http://localhost:${port}/graphql`);
