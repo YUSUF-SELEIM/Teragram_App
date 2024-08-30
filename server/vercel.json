@@ -13,6 +13,9 @@
         {
             "src": "/(.*)",
             "dest": "dest/app.js"
+        },
+        {
+            "src":"/graphql","dest":"dest/app.js"   
         }
     ]
 }
