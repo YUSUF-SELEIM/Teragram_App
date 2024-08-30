@@ -2,7 +2,7 @@ import { prisma } from '../../../prisma/prismaClient';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'hive';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 interface contextValue {
     user: any;
@@ -108,7 +108,9 @@ export const login = async (_parent: any, args: any) => {
     if (!isMatch) {
         throw new Error('Invalid email or password');
     }
-
+    if (!JWT_SECRET) {
+        throw new Error('JWT_SECRET environment variable is not set');
+      }
     // Generate a JWT token for the user
     const token = jwt.sign({ id: user.id }, JWT_SECRET, {
         expiresIn: '1h',
