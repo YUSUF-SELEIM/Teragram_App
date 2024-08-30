@@ -12,6 +12,7 @@ const GET_CHAT_BY_ID = gql`
       users {
         id
         name
+        imageUrl
       }
     }
   }
@@ -96,6 +97,7 @@ function Chat({
                   sender {
                     id
                     name
+                    imageUrl
                   }
                 }
               `,
@@ -173,7 +175,7 @@ function Chat({
     return { formattedDate, formattedTime };
   };
 
-  // Get the user's name that the current user is chatting with
+  // Get the user's name and image URL that the current user is chatting with
   const chattingWithUser = chatData?.getChatById?.users.find(
     (user: any) => user.id !== currentUserId,
   );
@@ -201,6 +203,7 @@ function Chat({
       {isChatVisible && (
         <div className="absolute right-0 z-50 md:w-[65%] w-full h-full md:block dark:bg-black bg-violet-700 bg-gradient-to-br">
           <ChatHeader
+            chattingWithImageUrl={chattingWithUser?.imageUrl || null}
             chattingWithName={chattingWithUser?.name || null}
             handleBackClick={handleBackClick}
           />
