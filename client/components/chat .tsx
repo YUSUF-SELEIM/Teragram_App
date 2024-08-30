@@ -79,7 +79,7 @@ function Chat({
   const { data, loading, error } = useQuery(GET_MESSAGES_BY_CHAT_ID, {
     variables: { chatId },
     skip: !chatId,
-    pollInterval: 5000,
+    pollInterval: 60000,
   });
 
   const [addMessage] = useMutation(ADD_MESSAGE, {
