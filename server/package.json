@@ -3,9 +3,10 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/app.ts",
+  "main": "./dest/app.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p .",
+    "start": "node ./dest/app.js",
     "dev": "nodemon --exec tsx ./src/app.ts"
   },
   "keywords": [],

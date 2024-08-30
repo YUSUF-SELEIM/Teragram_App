@@ -1,4 +1,4 @@
-import { register, getAllUsers, login, updateUserInfo, getUserInfo } from "../services/user.service";
+import { register, getAllUsers, login, updateUserInfo, getUserInfo } from "../services/user.service.js";
 // the params of the resolvers are: _parent, args, contextValue
 // _parent: the result of the previous resolver
 // args: the arguments passed to the resolver

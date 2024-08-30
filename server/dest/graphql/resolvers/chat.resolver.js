@@ -1,4 +1,4 @@
-import { findSingleChat, createSingleChat, findGroupChat, createGroupChat, getUserChats, getMessagesByChatId, addMessage, getChatById } from '../services/chat.service';
+import { findSingleChat, createSingleChat, findGroupChat, createGroupChat, getUserChats, getMessagesByChatId, addMessage, getChatById } from '../services/chat.service.js';
 const chatResolvers = {
     Query: {
         userChats: async (_parent, args) => {

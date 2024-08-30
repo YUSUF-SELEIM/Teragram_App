@@ -1,11 +1,11 @@
 import path from 'path';
 import { readFileSync } from 'fs';
-import userResolvers from './resolvers/user.resolver';
-import chatResolvers from './resolvers/chat.resolver';
+import userResolvers from './resolvers/user.resolver.js';
+import chatResolvers from './resolvers/chat.resolver.js';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const userTypeDefs = readFileSync(path.join(__dirname, './typeDefs/user.graphql'), 'utf-8');
-const chatTypeDefs = readFileSync(path.join(__dirname, './typeDefs/chat.graphql'), 'utf-8');
+const userTypeDefs = readFileSync(path.join(__dirname, '../../src/graphql/typeDefs/user.graphql'), 'utf-8');
+const chatTypeDefs = readFileSync(path.join(__dirname, '../../src/graphql/typeDefs/chat.graphql'), 'utf-8');
 export const typeDefs = ` 
   ${userTypeDefs},
   ${chatTypeDefs}
