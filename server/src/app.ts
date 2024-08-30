@@ -19,7 +19,7 @@ const server = new ApolloServer({
 await server.start();
 
 app.use(cors({
-  origin: ["http://localhost:3000", "https://sandbox.embed.apollographql.com","http://192.168.1.5:3000","https://teragram-app.vercel.app"],
+  origin: ["http://localhost:3000", "https://sandbox.embed.apollographql.com","http://192.168.1.5:3000","https://teragram-app.vercel.app/"],
   credentials: true,
 }));
 
