@@ -1,4 +1,4 @@
-import { prisma } from '../../../prisma/prismaClient';
+import { prisma } from '../../prisma/prismaClient';
 
 export async function findSingleChat(userIds: string[]) {
     console.log("Finding a chat between " + userIds[0] + " and " + userIds[1]);
