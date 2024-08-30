@@ -16,6 +16,9 @@
         },
         {
             "src":"/graphql","dest":"dest/app.js"   
+        },
+        {
+            "src":"/api/set-cookie","dest":"dest/app.js"   
         }
     ]
 }
