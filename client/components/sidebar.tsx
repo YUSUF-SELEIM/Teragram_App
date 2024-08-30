@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { FaPen } from "react-icons/fa";
 
-import Search from "./search";
 import UserInfo from "./userInfo";
 import PopOver from "./popover";
 import Users from "./users";
@@ -29,22 +27,12 @@ function Sidebar({
 
   return (
     <div className="relative flex flex-col h-full w-[87%] p-4 md:w-[30%] bg-neutral-100 dark:bg-neutral-900 dark:text-white ">
-      <div className="flex items-center w-full space-x-2">
-        <Image
-          alt="logo"
-          className="transition-transform transform cursor-pointer duration-250 hover:rotate-12"
-          height={50}
-          src="/logo.png"
-          width={50}
-        />
-        <Search />
-      </div>
       <UserChats
         handleChatClick={handleChatClick}
         id={id}
         shouldRefetch={shouldRefetch}
       />
-      {isUserInfoVisible && <UserInfo />}
+      {isUserInfoVisible && <UserInfo id={id} />}
       {isUsersVisible && (
         <Users
           myId={id}
