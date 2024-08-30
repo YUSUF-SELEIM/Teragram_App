@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc -p .",
     "start": "node ./dest/app.js",
-    "dev": "nodemon --exec tsx ./src/app.ts"
+    "dev": "nodemon --exec tsx ./src/app.ts",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
