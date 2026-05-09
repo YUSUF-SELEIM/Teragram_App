@@ -255,7 +255,7 @@ function Chat({
                             />
                           ) : (
                             <p
-                              className={`text-base text-start break-all whitespace-normal text-wrap ${
+                              className={`text-base text-start break-words whitespace-pre-wrap ${
                                 msg.sender.id === currentUserId
                                   ? " text-white "
                                   : " dark:text-white text-black"
